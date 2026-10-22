@@ -3,88 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BOU DCSA - Student Management System</title>
+<title>BOU - Student Management System</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#0d47a1;--secondary:#1976d2;--bg:#f4f7fb}
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
-body{background:var(--bg)}
-.header{background:var(--primary);color:#fff;padding:15px 25px;display:flex;align-items:center;justify-content:space-between}
-.logo-area{display:flex;align-items:center;gap:12px}
-.logo{width:50px;height:50px;background:#fff;color:var(--primary);border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:22px}
-.header h1{font-size:20px} .header p{font-size:12px;opacity:.9}
-.container{max-width:1100px;margin:20px auto;padding:0 15px;display:grid;grid-template-columns:320px 1fr;gap:20px}
-.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,.06)}
-.card h3{margin-bottom:15px;color:var(--primary);border-left:4px solid var(--primary);padding-left:10px}
-input,select{width:100%;padding:10px;margin:6px 0 12px;border:1px solid #ddd;border-radius:8px}
-.btn{width:100%;padding:11px;background:var(--secondary);color:#fff;border:0;border-radius:8px;font-weight:700;cursor:pointer}
-.btn:hover{background:var(--primary)}
-.search-box{margin-bottom:15px}
-table{width:100%;border-collapse:collapse}
-th,td{padding:10px;text-align:left;border-bottom:1px solid #eee;font-size:14px}
-th{background:#e3f2fd}
-.action-btn{padding:5px 8px;border:0;border-radius:5px;cursor:pointer;margin-right:4px}
-.del{background:#ffcdd2;color:#c62828} .edit{background:#c8e6c9;color:#2e7d32}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-.stat{background:#fff;padding:15px;border-radius:10px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-.stat h2{color:var(--primary)}
-@media(max-width:800px){.container{grid-template-columns:1fr}}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#eef3ff;color:#1e293b}
+.header{background:linear-gradient(90deg,#0b3d91,#1976d2);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:12px}
+.header img{width:54px;height:54px;border-radius:50%;background:#fff;padding:4px}
+.header h2{font-size:16px;line-height:1.2} .header small{font-size:11px;opacity:.9}
+.wrap{max-width:1100px;margin:12px auto;padding:0 12px;display:grid;grid-template-columns:360px 1fr;gap:12px}
+.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 6px 18px rgba(0,0,0,.06)}
+.card h3{font-size:14px;color:#0b3d91;border-left:4px solid #0b3d91;padding-left:8px;margin-bottom:12px}
+input,select{width:100%;padding:11px;border:1.5px solid #d7e2f5;border-radius:10px;margin-bottom:10px;outline:none}
+input:focus{border-color:#1976d2;background:#f8fbff}
+.btn{width:100%;padding:12px;background:#0b3d91;color:#fff;border:0;border-radius:10px;font-weight:700;cursor:pointer}
+.btn2{background:#111827}
+.error{color:#dc2626;font-size:12px;margin:-6px 0 8px;display:none}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.stat{background:#fff;padding:12px;border-radius:12px;text-align:center}
+.stat b{color:#0b3d91;font-size:20px}
+table{width:100%;border-collapse:collapse} th{font-size:11px;color:#64748b;text-align:left;padding:8px;border-bottom:1px solid #e2e8f0} td{padding:10px 6px;border-bottom:1px solid #f1f5f9;font-size:13px}
+.badge{background:#dbeafe;color:#0b3d91;padding:2px 8px;border-radius:20px;font-size:11px}
+@media(max-width:800px){.wrap{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="header">
-  <div class="logo-area">
-    <div class="logo">BOU</div>
-    <div><h1>Student Management System</h1><p>DCSA 3304 Project - 251 Term</p></div>
-  </div>
-  <div style="text-align:right;font-size:12px">ID: Your ID<br>balaykarmokar12</div>
+  <img src="https://upload.wikimedia.org/wikipedia/en/d8/Bangladesh_Open_University_logo.png" alt="BOU LOGO">
+  <div><h2>Student Management System</h2><small>Bangladesh Open University | DCSA 3304 Project - 251 Term<br>ID: balaykarmokar12</small></div>
 </div>
 
-<div class="container">
-  <div>
-    <div class="card">
-      <h3>Add New Student</h3>
-      <input id="name" placeholder="Student Name">
-      <input id="roll" placeholder="Roll No">
-      <select id="cls"><option>Class 9</option><option>Class 10</option><option>DCSA</option><option>HSC</option></select>
-      <input id="phone" placeholder="Phone Number">
-      <input id="gpa" placeholder="GPA / Result">
-      <button class="btn" onclick="addStudent()">+ Add Student</button>
-    </div>
+<div class="wrap">
+  <div class="card">
+    <h3>Add New Student</h3>
+    <input id="name" placeholder="Student Name *">
+    <div id="errName" class="error">Name is required</div>
+    <input id="roll" placeholder="Roll No (if empty, auto generate)">
+    <div id="errRoll" class="error">Roll is required</div>
+    <select id="dept"><option>DCSA</option><option>BBA</option><option>CSE</option></select>
+    <input id="phone" placeholder="Phone Number">
+    <input id="gpa" placeholder="GPA">
+    <button class="btn" onclick="add()">💾 Save Student</button>
+    <p style="font-size:11px;color:#64748b;text-align:center;margin-top:8px">✔ Data will be saved offline - No more lost</p>
   </div>
 
   <div>
     <div class="stats">
-      <div class="stat"><h2 id="total">0</h2><p>Total Student</p></div>
-      <div class="stat"><h2 id="present">0</h2><p>Present Today</p></div>
-      <div class="stat"><h2>DCSA</h2><p>Project 2025</p></div>
+      <div class="stat"><b id="c1">0</b><br><small>Total</small></div>
+      <div class="stat"><b id="c2">0</b><br><small>Present</small></div>
+      <div class="stat"><b>DCSA</b><br><small>2025</small></div>
     </div>
-
     <div class="card">
       <h3>Student List</h3>
-      <input class="search-box" id="search" placeholder="Search by Name or Roll..." onkeyup="render()">
-      <table>
-        <thead><tr><th>Roll</th><th>Name</th><th>Class</th><th>Action</th></tr></thead>
-        <tbody id="list"></tbody>
-      </table>
-      <br><button class="btn" style="background:#333" onclick="window.print()">Print / PDF Save</button>
+      <input id="search" placeholder="Search..." oninput="render()">
+      <table><thead><tr><th>Name / Roll</th><th>Dept</th><th>Action</th></tr></thead><tbody id="tbody"></tbody></table>
     </div>
   </div>
 </div>
 
 <script>
-let students = JSON.parse(localStorage.getItem('bou_students')||'[]');
-function addStudent(){
-  let s={name:name.value,roll:roll.value,cls:cls.value,phone:phone.value,gpa:gpa.value,id:Date.now()};
-  if(!s.name||!s.roll) return alert('Name & Roll Required');
-  students.push(s); localStorage.setItem('bou_students',JSON.stringify(students));
-  name.value=roll.value=phone.value=gpa.value=''; render();
+let students = JSON.parse(localStorage.getItem('bou_v3_final')||'[]');
+function add(){
+  let nameEl=document.getElementById('name'), rollEl=document.getElementById('roll');
+  let errName=document.getElementById('errName'), errRoll=document.getElementById('errRoll');
+  errName.style.display='none'; errRoll.style.display='none';
+  let name=nameEl.value.trim();
+  let roll=rollEl.value.trim();
+  if(!name){ errName.style.display='block'; nameEl.focus(); return; }
+  // FIX: যদি Roll খালি থাকে, Auto Generate করবে - Error দেখাবে না
+  if(!roll){ roll = 'BOU-' + Date.now().toString().slice(-5); }
+  let obj={id:Date.now(), name, roll, dept:dept.value, phone:phone.value, gpa:gpa.value};
+  students.push(obj);
+  localStorage.setItem('bou_v3_final', JSON.stringify(students));
+  nameEl.value=''; rollEl.value=''; phone.value=''; gpa.value='';
+  render();
 }
-function delStudent(id){students=students.filter(x=>x.id!=id);localStorage.setItem('bou_students',JSON.stringify(students));render();}
 function render(){
-  let q=search.value.toLowerCase(); let filtered=students.filter(s=>s.name.toLowerCase().includes(q)||s.roll.includes(q));
-  list.innerHTML=filtered.map(s=>`<tr><td>${s.roll}</td><td>${s.name}<br><small>${s.phone}</small></td><td>${s.cls}</td><td><button class='action-btn del' onclick='delStudent(${s.id})'>Del</button></td></tr>`).join('');
-  total.innerText=students.length; present.innerText=students.length;
+  let q=search.value.toLowerCase();
+  let list=students.filter(s=>s.name.toLowerCase().includes(q)||s.roll.toLowerCase().includes(q));
+  tbody.innerHTML=list.map(s=>`<tr><td><b>${s.name}</b><br><small>${s.roll}</small></td><td><span class=badge>${s.dept}</span></td><td><button onclick="del(${s.id})" style="border:0;background:#fee2e2;color:#b91c1c;padding:5px 8px;border-radius:6px;cursor:pointer">Delete</button></td></tr>`).join('') || `<tr><td colspan=3 style="text-align:center;padding:20px;color:#94a3b8">No students yet</td></tr>`;
+  c1.innerText=students.length; c2.innerText=students.length;
 }
+function del(id){ students=students.filter(s=>s.id!=id); localStorage.setItem('bou_v3_final',JSON.stringify(students)); render(); }
 render();
 </script>
 </body>
